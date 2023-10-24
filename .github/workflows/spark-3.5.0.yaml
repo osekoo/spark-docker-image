@@ -34,8 +34,8 @@ jobs:
         run: |
           docker build \
           --build-arg "SPARK_VERSION=${{ env.spark_version }}" \
-          --build-arg "JAVA_VERSION=${ {env.java_version }}" \
-          --build-arg "SBT_VERSION=${ {env.sbt_version}}" \
+          --build-arg "JAVA_VERSION=${{ env.java_version }}" \
+          --build-arg "SBT_VERSION=${{ env.sbt_version }}" \
           --tag ${{ env.registry }}/${{ env.image_tag }} \
           .
           docker push ${{ env.registry }}/${{ env.image_tag }}
