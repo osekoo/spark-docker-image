@@ -16,9 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Spark Docker image
-        run: docker build . \
-          --file Dockerfile
-          --tag osekoo/spark:$spark_version \
+        run: |
+            docker build \
           --build-arg "SPARK_VERSION=$spark_version" \
           --build-arg "JAVA_VERSION=$java_version" \
-          --build-arg "SBT_VERSION=$sbt_version"
+          --build-arg "SBT_VERSION=$sbt_version" \
+          --tag osekoo/spark:$spark_version \
+          .
