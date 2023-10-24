@@ -3,16 +3,22 @@ name: Docker Image CI
 on:
   push:
     branches: [ "develop" ]
-  pull_request:
-    branches: [ "develop" ]
 
+env:
+  spark_version: 3.5.0
+  java_version: 17
+  sbt_version: 1.9.7
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Spark Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - uses: actions/checkout@v3
+      - name: Build the Spark Docker image
+        run: docker build . \
+          --file Dockerfile
+          --tag osekoo/spark:$spark_version \
+          --build-arg "SPARK_VERSION=$spark_version" \
+          --build-arg "JAVA_VERSION=$java_version" \
+          --build-arg "SBT_VERSION=$sbt_version"
