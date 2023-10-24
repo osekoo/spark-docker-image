@@ -5,9 +5,9 @@ on:
     branches: [ "develop" ]
 
 env:
-  spark_version: 3.4.1
-  java_version: 8
-  sbt_version: 1.9.6
+  spark_version: 3.5.0
+  java_version: 17
+  sbt_version: 1.9.7
 jobs:
 
   build:
