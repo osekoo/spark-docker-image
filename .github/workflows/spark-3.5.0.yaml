@@ -8,18 +8,34 @@ env:
   spark_version: 3.5.0
   java_version: 17
   sbt_version: 1.9.7
+  registry: ghcr.io
+  image_tag: osekoo/spark:$spark_version
+
 jobs:
 
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - uses: actions/checkout@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: $registry
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build the Spark Docker image
         run: |
           docker build \
           --build-arg "SPARK_VERSION=$spark_version" \
           --build-arg "JAVA_VERSION=$java_version" \
           --build-arg "SBT_VERSION=$sbt_version" \
-          --tag osekoo/spark:$spark_version \
+          --tag $image_tag \
           .
+          docker push $image_tag
