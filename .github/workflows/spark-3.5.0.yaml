@@ -9,7 +9,7 @@ env:
   java_version: 17
   sbt_version: 1.9.7
   registry: ghcr.io
-  image_tag: osekoo/spark:${{ env.spark_version }}
+  image_tag: osekoo/spark:3.5.0
 
 jobs:
 
@@ -36,6 +36,6 @@ jobs:
           --build-arg "SPARK_VERSION=${{ env.spark_version }}" \
           --build-arg "JAVA_VERSION=${ {env.java_version }}" \
           --build-arg "SBT_VERSION=${ {env.sbt_version}}" \
-          --tag ${{ env.image_tag }} \
+          --tag ${{ env.registry }}/${{ env.image_tag }} \
           .
-          docker push ${{ env.image_tag }}
+          docker push ${{ env.registry }}/${{ env.image_tag }}
