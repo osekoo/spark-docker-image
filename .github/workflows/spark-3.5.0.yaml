@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build the Spark Docker image
         run: |
-            docker build \
+          docker build \
           --build-arg "SPARK_VERSION=$spark_version" \
           --build-arg "JAVA_VERSION=$java_version" \
           --build-arg "SBT_VERSION=$sbt_version" \
