@@ -18,6 +18,7 @@ docker rmi osekoo/spark:$spark_version \
 ## Running with docker compose
 
 ### As Master
+Launch spark master service:
 
 ````shell
 services:
@@ -32,6 +33,8 @@ services:
 ````
 
 ### As Worker
+Spark worker connecting to spark master. the master should be running first.  
+`replicas` parameter holds the number of workers to instantiate.
 
 ````shell
 services:
@@ -48,6 +51,7 @@ services:
 ````
 
 ### As Client
+In `client` mode, the app executes `spark-submit` commands with the following arguments.
 
 ````shell
 services:
