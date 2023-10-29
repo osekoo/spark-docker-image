@@ -11,13 +11,13 @@ ARG SPARK_VERSION=3.5.0
 ARG JAVA_VERSION=17
 ARG SBT_VERSION=1.9.7
 
-RUN echo SPARK_VERSION=$SPARK_VERSION
-RUN echo JAVA_VERSION=$JAVA_VERSION
-RUN echo SBT_VERSION=$SBT_VERSION
+RUN echo SPARK_VERSION=$SPARK_VERSION; \
+    echo JAVA_VERSION=$JAVA_VERSION; \
+    echo SBT_VERSION=$SBT_VERSION
 
 # installing `sudo`
-RUN apt update
-RUN apt -y install sudo
+RUN apt update; \
+    apt -y install sudo
 
 # installing `wget`
 RUN apt install -y wget; \
@@ -51,7 +51,8 @@ RUN sudo apt update; \
 RUN set -ex; \
     apt-get update; \
     apt-get install -y python3 python3-pip; \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*; \
+    echo  "alias python=python3" >> ~/.bashrc
 
 # exposing spark ports `8080, 7077, 6066, 4040`
 EXPOSE 8080 7077 6066 4040
